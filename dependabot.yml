@@ -1,0 +1,65 @@
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/packages/python-sdk"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "python"]
+    commit-message:
+      prefix: "deps(python):"
+    groups:
+      development:
+        patterns: ["*"]
+        dependency-type: "development"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/typescript-sdk"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "typescript"]
+    commit-message:
+      prefix: "deps(typescript):"
+    groups:
+      development:
+        patterns: ["*"]
+        dependency-type: "development"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/mcp"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "mcp"]
+    commit-message:
+      prefix: "deps(mcp):"
+
+  - package-ecosystem: "npm"
+    directory: "/packages/ai-provider"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "ai-provider"]
+    commit-message:
+      prefix: "deps(ai-provider):"
+
+  - package-ecosystem: "gomod"
+    directory: "/packages/cli"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "go"]
+    commit-message:
+      prefix: "deps(cli):"
+
+  - package-ecosystem: "pip"
+    directory: "/packages/finkit"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "finkit"]
+    commit-message:
+      prefix: "deps(finkit):"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels: ["dependencies", "ci"]
+    commit-message:
+      prefix: "ci(deps):"

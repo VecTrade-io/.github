@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: General Questions & Discussion
+    url: https://github.com/orgs/VecTrade-io/discussions
+    about: Ask questions, share ideas, and discuss VecTrade with the community.
+  - name: Security Vulnerability
+    url: https://github.com/VecTrade-io/.github/blob/main/SECURITY.md
+    about: Report security vulnerabilities privately — do NOT open a public issue.

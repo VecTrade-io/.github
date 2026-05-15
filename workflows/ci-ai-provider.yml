@@ -1,0 +1,48 @@
+name: CI — AI Provider
+on:
+  push:
+    branches: [main]
+    paths: ['packages/ai-provider/**']
+  pull_request:
+    paths: ['packages/ai-provider/**']
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install dependencies
+        run: |
+          cd packages/ai-provider
+          npm ci
+      - name: Type check
+        run: |
+          cd packages/ai-provider
+          npx tsc --noEmit
+
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node-version: ['18', '20', '22']
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: |
+          cd packages/ai-provider
+          npm ci
+      - name: Run tests
+        run: |
+          cd packages/ai-provider
+          npx vitest run

@@ -1,0 +1,51 @@
+name: Release — TypeScript SDK
+on:
+  push:
+    tags: ['typescript-sdk/v*']
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+          cache: 'pnpm'
+          cache-dependency-path: packages/typescript-sdk/pnpm-lock.yaml
+
+      - name: Install
+        working-directory: packages/typescript-sdk
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        working-directory: packages/typescript-sdk
+        run: pnpm build
+
+      - name: Publish to npm
+        working-directory: packages/typescript-sdk
+        run: pnpm publish --no-git-checks --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          body: |
+            ## TypeScript SDK ${{ github.ref_name }}
+
+            Install or upgrade:
+            ```bash
+            npm install @vectrade/sdk@latest
+            ```
