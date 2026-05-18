@@ -5,7 +5,7 @@
 <h3 align="center">Financial Data Infrastructure for Developers</h3>
 
 <p align="center">
-  <a href="https://vectrade.io">Website</a> · <a href="https://docs.vectrade.io">Docs</a> · <a href="https://github.com/VecTrade-io/vectrade-examples">Examples</a> · <a href="https://discord.gg/vectrade">Discord</a>
+  <a href="https://vectrade.io">Website</a> · <a href="https://vectrade.io/api-docs">Docs</a> · <a href="https://github.com/VecTrade-io/vectrade-examples">Examples</a> · <a href="https://discord.gg/vectrade">Discord</a>
 </p>
 
 ---
